@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/recentlist"
+        android:icon="@drawable/recentimg"
+        android:title="Recent" />
+
+    <item
+        android:id="@+id/myadverts"
+        android:icon="@drawable/mylist"
+        android:title="My Adverts" />
+
+
+
+
+</menu>
