@@ -1,12 +1,9 @@
 package com.example.asus.advertproject;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.Button;
 
 import com.example.asus.advertproject.advertfeed.Advert;
 import com.example.asus.advertproject.advertfeed.AdvertClickListener;
@@ -23,9 +20,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static java.security.AccessController.getContext;
-
-public class MainActivity extends AppCompatActivity implements AdvertClickListener {
+public class MainActivity2 extends AppCompatActivity implements AdvertClickListener {
     private RecyclerView mRecyclerView;
     private RecyclerViewAdapter mAdapter;
     private DatabaseReference mDatabase;
@@ -34,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements AdvertClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.advertfeed_fragment);
         advertList=new ArrayList<>();
         mRecyclerView = findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this.getApplicationContext());
