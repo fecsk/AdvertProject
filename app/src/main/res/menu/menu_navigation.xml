@@ -2,15 +2,39 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/Searchbutton"
+    <item
+        android:id="@+id/Searchbutton"
+        android:icon="@drawable/ic_menu_search"
+        android:orderInCategory="102"
         android:title="Search"
-       android:icon="@drawable/ic_menu_search"
         app:actionViewClass="android.widget.SearchView"
         app:showAsAction="always">
 
-
-
+    </item>
+    <item
+        android:id="@+id/Addbutton"
+        android:icon="@drawable/ic_add_black_24dp"
+        android:orderInCategory="103"
+        android:title="Add"
+        app:showAsAction="always">
 
     </item>
+
+    <item android:id="@+id/Loginbutton"
+        android:title="Login/Logout"
+
+        android:orderInCategory="300"
+        app:showAsAction="ifRoom">
+
+    </item>
+    <item android:id="@+id/Editbutton"
+        android:title="Edit Profile"
+
+        android:orderInCategory="300"
+        app:showAsAction="ifRoom">
+
+    </item>
+
+
 
 </menu>
