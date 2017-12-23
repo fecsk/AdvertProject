@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.example.asus.advertproject.R;
 import com.example.asus.advertproject.main.NavigationManager;
+import com.example.asus.advertproject.model.Advert;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

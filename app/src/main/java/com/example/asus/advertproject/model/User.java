@@ -1,4 +1,4 @@
-package com.example.asus.advertproject.login;
+package com.example.asus.advertproject.model;
 
 /**
  * Created by Asus on 2017. 11. 22..

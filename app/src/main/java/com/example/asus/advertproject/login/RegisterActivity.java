@@ -17,6 +17,7 @@ package com.example.asus.advertproject.login;
         import android.widget.Toast;
 
         import com.example.asus.advertproject.R;
+        import com.example.asus.advertproject.model.User;
         import com.google.android.gms.tasks.OnCompleteListener;
         import com.google.android.gms.tasks.Task;
         import com.google.firebase.auth.AuthResult;

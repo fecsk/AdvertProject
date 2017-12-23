@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.example.asus.advertproject.advertfeed.Advert;
+import com.example.asus.advertproject.model.Advert;
 import com.example.asus.advertproject.advertfeed.AdvertClickListener;
 import com.example.asus.advertproject.advertfeed.RecyclerViewAdapter;
 import com.google.firebase.database.DataSnapshot;

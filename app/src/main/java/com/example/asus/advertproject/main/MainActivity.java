@@ -15,13 +15,9 @@ import android.view.WindowManager;
 import com.example.asus.advertproject.R;
 import com.example.asus.advertproject.advertfeed.*;
 import com.example.asus.advertproject.login.LoginActivity;
-import com.example.asus.advertproject.login.RegisterActivity;
+import com.example.asus.advertproject.model.Advert;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
