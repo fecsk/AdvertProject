@@ -1,7 +1,11 @@
 package com.example.asus.advertproject.model;
 
+import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -16,11 +20,12 @@ public class Advert implements Parcelable {
     public String location;
     public String photoURL;
     public String creator_photo_URL;
+    public ArrayList<String> photos;
 
     public Advert()
     {};
 
-    public Advert(String title, String description, String creatorid,  String timestamp, String location,String photoURL,String creator_photo_URL) {
+    public Advert(String title, String description, String creatorid,  String timestamp, String location,String photoURL,String creator_photo_URL,ArrayList<String> photos) {
         this.title = title;
         this.description = description;
         this.creatorid = creatorid;
@@ -28,6 +33,7 @@ public class Advert implements Parcelable {
         this.location = location;
         this.photoURL = photoURL;
         this.creator_photo_URL=creator_photo_URL;
+        this.photos=photos;
         }
 
 
@@ -39,6 +45,7 @@ public class Advert implements Parcelable {
         this.location = in.readString();
         this.photoURL =in.readString();
         this.creator_photo_URL=in.readString();
+        this.photos = (ArrayList<String>) in.readSerializable();
     }
 
     public static final Creator<Advert> CREATOR = new Creator<Advert>() {
@@ -67,6 +74,7 @@ public class Advert implements Parcelable {
         parcel.writeString(location );
         parcel.writeString(photoURL);
         parcel.writeString(creator_photo_URL);
+        parcel.writeSerializable(photos);
     }
 
     public String getTitle() {

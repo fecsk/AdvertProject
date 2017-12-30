@@ -7,4 +7,5 @@ import android.support.v4.view.PagerAdapter;
  */
 
 public abstract class ViewPagerAdapter extends PagerAdapter {
+    int a=12;
 }

@@ -83,15 +83,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(resId);
     }
 
-    private void sendPostToFirebase() {
 
-        String timestamp = Long.toString(System.currentTimeMillis());
-        Advert advert=new Advert("ABCD!!","nagyon finom erett banan 10 lej/kg vagy cserelem kukoricara 1:10 aranyban","abc",
-                timestamp,"433543543","gs://advertproject-10f39.appspot.com/advertpics/banana.jpg","gs://advertproject-10f39.appspot.com/profilepics/harambe.jpg");
-        String key = mDatabase.child("adverts").push().getKey();
-        mDatabase.child("adverts").child(key).setValue(advert);
-
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -30,6 +30,56 @@
       "api_key": [
         {
           "current_key": "AIzaSyACbHTlOT09fXS4ZvrduqbIGiORK0Mq5UQ"
+        },
+        {
+          "current_key": "AIzaSyBvP9el7Y6dJo79ReWjzOmKbxNxLKGScBE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "895540176539-hr95acuhr56j7jgutd9ho7kjodeiq3uc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:895540176539:android:8f2911fc4a4ab154",
+        "android_client_info": {
+          "package_name": "com.example.amos1.adproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "895540176539-ib9v1oq26kqvuk45kii287ccatmfgk6s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.amos1.adproject",
+            "certificate_hash": "f70eb0eee45d7af54aeef9171df49eecb0275138"
+          }
+        },
+        {
+          "client_id": "895540176539-hr95acuhr56j7jgutd9ho7kjodeiq3uc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACbHTlOT09fXS4ZvrduqbIGiORK0Mq5UQ"
+        },
+        {
+          "current_key": "AIzaSyBvP9el7Y6dJo79ReWjzOmKbxNxLKGScBE"
         }
       ],
       "services": {
