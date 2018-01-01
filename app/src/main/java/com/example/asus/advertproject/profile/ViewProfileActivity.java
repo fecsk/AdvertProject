@@ -2,6 +2,7 @@ package com.example.asus.advertproject.profile;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +16,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class ViewProfileActivity extends AppCompatActivity {
+    private static final String TAG = "ViewProfileActivity";
     private TextView firstNameTextView,
             lastNameTextView,
             emailAddressTextView,
@@ -25,6 +27,7 @@ public class ViewProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_profile);
+        Log.d(TAG, "hereeeeeeeeeeeeeeeEEeee");
 
         firstNameTextView = findViewById(R.id.text_view_first_name);
         lastNameTextView = findViewById(R.id.text_view_last_name);

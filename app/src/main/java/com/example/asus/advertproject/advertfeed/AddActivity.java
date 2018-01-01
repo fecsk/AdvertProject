@@ -3,12 +3,14 @@ package com.example.asus.advertproject.advertfeed;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,7 +23,7 @@ import android.widget.Toast;
 
 import com.example.asus.advertproject.R;
 import com.example.asus.advertproject.model.Advert;
-import com.example.asus.advertproject.model.Coordinates;
+import com.example.asus.advertproject.permissions.Permissions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -155,7 +157,7 @@ public class AddActivity extends AppCompatActivity {
                         if(urls.size()>0) {
 
                             Advert uj = new Advert(titleEt.getText().toString(), descriptionEt.getText().toString(), userID, Long.toString(System.currentTimeMillis()),
-                                    new Coordinates(mlatitude, mlongitude), urls.get(0), "gs://advertproject-10f39.appspot.com/profilepics/harambe.jpg", urls);
+                                    mlatitude, mlongitude, urls.get(0), "gs://advertproject-10f39.appspot.com/profilepics/harambe.jpg", urls);
                             String key = mDatabase.child("adverts").push().getKey();
                             mDatabase.child("adverts").child(key).setValue(uj);
                             finish();
@@ -187,23 +189,25 @@ public class AddActivity extends AppCompatActivity {
         super.onActivityResult(requestCode,resultCode,data);
         switch (requestCode){
             case PICK_IMAGE:
-                imageUri=data.getData();
-                imguris.add(imageUri);
-                Bitmap im=null;
-                try {
-                    im = decodeUri(getApplicationContext(), imageUri, 100);
+                if(resultCode != 0) {
+                    imageUri = data.getData();
+                    imguris.add(imageUri);
+                    Bitmap im = null;
+                    try {
+                        im = decodeUri(getApplicationContext(), imageUri, 100);
+                    } catch (Exception e) {
+                        //
+                    }
+                    if (im != null)
+                        adapter.add(im);
+                    adapter.notifyDataSetChanged();
                 }
-                catch (Exception e)
-                {
-                    //
-                }
-                if(im !=null)
-                    adapter.add(im);
-                adapter.notifyDataSetChanged();
 
             case MAPS_COORDINATE_ADD:
-                mlatitude = data.getDoubleExtra("latitude", 0);
-                mlongitude = data.getDoubleExtra("longitude", 0);
+                if(resultCode != 0) {
+                    mlatitude = data.getDoubleExtra("latitude", 0);
+                    mlongitude = data.getDoubleExtra("longitude", 0);
+                }
             default:
                 break;
         }
@@ -242,10 +246,11 @@ public class AddActivity extends AppCompatActivity {
     }
     private void checkFilePermissions() {
         if(Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP){
-            int permissionCheck = AddActivity.this.checkSelfPermission("Manifest.permission.READ_EXTERNAL_STORAGE");
-            permissionCheck += AddActivity.this.checkSelfPermission("Manifest.permission.WRITE_EXTERNAL_STORAGE");
-            if (permissionCheck != 0) {
-                this.requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE,android.Manifest.permission.READ_EXTERNAL_STORAGE}, 1001); //Any number
+            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                Permissions.permissionRequest(this, Permissions.permissions, Permissions.PERMISSION_KEY);
             }
         }else{
             Log.d(TAG, "checkBTPermissions: No need to check permissions. SDK version < LOLLIPOP.");

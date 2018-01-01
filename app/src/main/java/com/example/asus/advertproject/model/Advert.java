@@ -20,17 +20,19 @@ public class Advert implements Parcelable {
     public String photoURL;
     public String creator_photo_URL;
     public ArrayList<String> photos;
-    public Coordinates location;
+    public double latitude;
+    public double longitude;
 
     public Advert()
     {};
 
-    public Advert(String title, String description, String creatorid,  String timestamp, Coordinates location, String photoURL, String creator_photo_URL, ArrayList<String> photos) {
+    public Advert(String title, String description, String creatorid,  String timestamp, double latitude, double longitude, String photoURL, String creator_photo_URL, ArrayList<String> photos) {
         this.title = title;
         this.description = description;
         this.creatorid = creatorid;
         this.timestamp = timestamp;
-        this.location = location;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.photoURL = photoURL;
         this.creator_photo_URL=creator_photo_URL;
         this.photos=photos;
@@ -42,7 +44,8 @@ public class Advert implements Parcelable {
         this.description = in.readString();
         this.creatorid = in.readString();
         this.timestamp = in.readString();
-        this.location = in.readParcelable(Coordinates.class.getClassLoader());
+        this.latitude = in.readDouble();
+        this.longitude = in.readDouble();
         this.photoURL =in.readString();
         this.creator_photo_URL=in.readString();
         this.photos = (ArrayList<String>) in.readSerializable();
@@ -71,7 +74,8 @@ public class Advert implements Parcelable {
         parcel.writeString( description);
         parcel.writeString(creatorid );
         parcel.writeString( timestamp);
-        parcel.writeParcelable(location, i);
+        parcel.writeDouble(latitude);
+        parcel.writeDouble(longitude);
         parcel.writeString(photoURL);
         parcel.writeString(creator_photo_URL);
         parcel.writeSerializable(photos);
