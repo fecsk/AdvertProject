@@ -36,7 +36,8 @@
         <activity
             android:name=".login.RegisterActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".login.ForgotPasswordActivity"></activity>
+        <activity android:name=".login.ForgotPasswordActivity" />
+        <activity android:name=".profile.ViewProfileActivity"></activity>
     </application>
 
 </manifest>

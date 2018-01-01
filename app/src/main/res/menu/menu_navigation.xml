@@ -27,7 +27,16 @@
         app:showAsAction="ifRoom">
 
     </item>
-    <item android:id="@+id/Editbutton"
+
+    <item android:id="@+id/viewProfileButton"
+        android:title="View Profile"
+
+        android:orderInCategory="300"
+        app:showAsAction="ifRoom">
+
+    </item>
+
+    <item android:id="@+id/editProfileButton"
         android:title="Edit Profile"
 
         android:orderInCategory="300"

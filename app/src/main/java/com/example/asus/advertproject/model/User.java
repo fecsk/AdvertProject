@@ -8,12 +8,14 @@ public class User {
     private String u_id;
     private String firstName;
     private String lastName;
+    private String email;
     private String phoneNumber;
 
     public User (Builder builder){
         this.firstName = builder.firstName;
         this.lastName = builder.lastName;
         this.u_id = builder.Uid;
+        this.email = builder.email;
         this.phoneNumber = builder.phoneNumber;
     }
 
@@ -21,6 +23,7 @@ public class User {
         String Uid;
         String firstName;
         String lastName;
+        String email;
         String phoneNumber;
 
         public Builder() {
@@ -35,6 +38,10 @@ public class User {
         }
         public Builder lastName(String blname) {
             lastName = blname;
+            return this;
+        }
+        public Builder email(String bemail) {
+            email = bemail;
             return this;
         }
         public Builder phoneNumber(String bNumber) {
@@ -55,6 +62,10 @@ public class User {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public String getPhoneNumber() { return phoneNumber; }

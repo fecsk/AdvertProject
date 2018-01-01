@@ -123,6 +123,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                                 .U_id(uId)
                                                 .firstName(firstName)
                                                 .lastName(lastName)
+                                                .email(email)
                                                 .phoneNumber(phoneNumber)
                                                 .bulid();
                                         FirebaseDatabase database = FirebaseDatabase.getInstance();

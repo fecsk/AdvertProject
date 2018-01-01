@@ -16,6 +16,7 @@ import com.example.asus.advertproject.R;
 import com.example.asus.advertproject.advertfeed.*;
 import com.example.asus.advertproject.login.LoginActivity;
 import com.example.asus.advertproject.model.Advert;
+import com.example.asus.advertproject.profile.ViewProfileActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
         };
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
     }
 
 
@@ -111,7 +113,16 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i);
             return true;
         }
-
+        if (id == R.id.viewProfileButton) {
+            Intent i=new Intent(MainActivity.this,ViewProfileActivity.class);
+            startActivity(i);
+            return true;
+        }
+        if (id == R.id.editProfileButton) {
+            Intent i=new Intent(MainActivity.this,ViewProfileActivity.class);
+            startActivity(i);
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
