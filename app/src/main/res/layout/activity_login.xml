@@ -30,6 +30,14 @@
             android:text="Login"
             android:textSize="30sp" />
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="156dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/advertapplogo" />
+
         <EditText
             android:id="@+id/et_email"
             android:layout_width="227dp"
