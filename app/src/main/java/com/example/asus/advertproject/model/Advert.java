@@ -17,15 +17,15 @@ public class Advert implements Parcelable {
     public String description;
     public String creatorid;
     public String timestamp;
-    public String location;
     public String photoURL;
     public String creator_photo_URL;
     public ArrayList<String> photos;
+    public Coordinates location;
 
     public Advert()
     {};
 
-    public Advert(String title, String description, String creatorid,  String timestamp, String location,String photoURL,String creator_photo_URL,ArrayList<String> photos) {
+    public Advert(String title, String description, String creatorid,  String timestamp, Coordinates location, String photoURL, String creator_photo_URL, ArrayList<String> photos) {
         this.title = title;
         this.description = description;
         this.creatorid = creatorid;
@@ -42,7 +42,7 @@ public class Advert implements Parcelable {
         this.description = in.readString();
         this.creatorid = in.readString();
         this.timestamp = in.readString();
-        this.location = in.readString();
+        this.location = in.readParcelable(Coordinates.class.getClassLoader());
         this.photoURL =in.readString();
         this.creator_photo_URL=in.readString();
         this.photos = (ArrayList<String>) in.readSerializable();
@@ -71,7 +71,7 @@ public class Advert implements Parcelable {
         parcel.writeString( description);
         parcel.writeString(creatorid );
         parcel.writeString( timestamp);
-        parcel.writeString(location );
+        parcel.writeParcelable(location, i);
         parcel.writeString(photoURL);
         parcel.writeString(creator_photo_URL);
         parcel.writeSerializable(photos);
@@ -91,10 +91,6 @@ public class Advert implements Parcelable {
 
     public String getTimestamp() {
         return timestamp;
-    }
-
-    public String getLocation() {
-        return location;
     }
 
     public String getPhotoURL() {

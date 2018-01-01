@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.asus.advertproject.R;
 import com.example.asus.advertproject.model.Advert;
+import com.example.asus.advertproject.model.Coordinates;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -39,11 +40,12 @@ import java.util.List;
 public class AddActivity extends AppCompatActivity {
     private static final String TAG = "AddActivity";
     ImageView imageView;
-    Button addPhotoButton,publishButton;
+    Button addPhotoButton, publishButton, locationButton;
     Uri imageUri;
     ListView lst;
     private List<Bitmap> imageList;
     private static final int PICK_IMAGE=100;
+    private final static int MAPS_COORDINATE_ADD = 101;
     private MyListViewAdapter adapter;
     private StorageReference mStorageRef;
     private FirebaseAuth auth;
@@ -52,6 +54,7 @@ public class AddActivity extends AppCompatActivity {
     private EditText descriptionEt,titleEt;
     private DatabaseReference mDatabase;
     private ArrayList<String> urls;
+    private Double mlatitude, mlongitude;
     private int counter=0;
     String userID = "000";
 
@@ -77,6 +80,7 @@ public class AddActivity extends AppCompatActivity {
 
         addPhotoButton =(Button) findViewById(R.id.addPhotoBtn);
         publishButton=(Button) findViewById(R.id.publishBtn);
+        locationButton = findViewById(R.id.locationBtn);
 
         publishButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,6 +93,14 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 openGallery();
+            }
+        });
+        locationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(AddActivity.this, MapActivity.class);
+                //Log.d(TAG, "clickeddddddddddd");
+                startActivityForResult(i, MAPS_COORDINATE_ADD);
             }
         });
     }
@@ -142,7 +154,8 @@ public class AddActivity extends AppCompatActivity {
                         toastMessage("Upload Success");
                         if(urls.size()>0) {
 
-                            Advert uj = new Advert(titleEt.getText().toString(), descriptionEt.getText().toString(), userID, Long.toString(System.currentTimeMillis()), "abc", urls.get(0), "gs://advertproject-10f39.appspot.com/profilepics/harambe.jpg", urls);
+                            Advert uj = new Advert(titleEt.getText().toString(), descriptionEt.getText().toString(), userID, Long.toString(System.currentTimeMillis()),
+                                    new Coordinates(mlatitude, mlongitude), urls.get(0), "gs://advertproject-10f39.appspot.com/profilepics/harambe.jpg", urls);
                             String key = mDatabase.child("adverts").push().getKey();
                             mDatabase.child("adverts").child(key).setValue(uj);
                             finish();
@@ -172,22 +185,27 @@ public class AddActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode,int resultCode,Intent data)
     {
         super.onActivityResult(requestCode,resultCode,data);
-        if(resultCode==RESULT_OK && requestCode==PICK_IMAGE)
-        {
-            imageUri=data.getData();
-            imguris.add(imageUri);
-            Bitmap im=null;
-            try {
-                im = decodeUri(getApplicationContext(), imageUri, 100);
-            }
-            catch (Exception e)
-            {
-                //
-            }
-            if(im !=null)
-            adapter.add(im);
-            adapter.notifyDataSetChanged();
+        switch (requestCode){
+            case PICK_IMAGE:
+                imageUri=data.getData();
+                imguris.add(imageUri);
+                Bitmap im=null;
+                try {
+                    im = decodeUri(getApplicationContext(), imageUri, 100);
+                }
+                catch (Exception e)
+                {
+                    //
+                }
+                if(im !=null)
+                    adapter.add(im);
+                adapter.notifyDataSetChanged();
 
+            case MAPS_COORDINATE_ADD:
+                mlatitude = data.getDoubleExtra("latitude", 0);
+                mlongitude = data.getDoubleExtra("longitude", 0);
+            default:
+                break;
         }
     }
 

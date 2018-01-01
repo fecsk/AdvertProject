@@ -44,8 +44,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private DatabaseReference databaseReference;
     private FirebaseAuth mAuth;
     private final static String TAG = "Login: ";
-    private final static int RC_SIGN_IN = 1;
-    private final static int RC_GOOGLE_SIGN_IN = 5002;
+    //private final static int RC_SIGN_IN = 1;
+    private final static int RC_GOOGLE_SIGN_IN = 1;
     public final static String AUTH_ERROR = "FIRBSE_AUTH_ERROR";
 
     @Override
