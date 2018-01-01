@@ -62,8 +62,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         buttonRegister.setOnClickListener(this);
         tvForgot = findViewById(R.id.tv_forgot);
         tvForgot.setOnClickListener(this);
-        //buttonSkip = findViewById(R.id.btn_skip);
-        //buttonSkip.setOnClickListener(this);
+        buttonSkip = findViewById(R.id.btn_skip);
+        buttonSkip.setOnClickListener(this);
         findViewById(R.id.btn_google).setOnClickListener(this);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -111,6 +111,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.tv_forgot:
                 Intent i2 = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
                 startActivity(i2);
+                break;
+
+            case R.id.btn_skip:
+                finish();
                 break;
 
             default:

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background2"
     >
 
     <LinearLayout
@@ -27,12 +28,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:text="Login"
+            android:text="@string/login"
+            android:textColor="@color/colorDarkBlue"
             android:textSize="30sp" />
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="156dp"
+            android:layout_height="170dp"
             android:layout_marginLeft="3dp"
             android:layout_marginRight="3dp"
             android:layout_marginTop="10dp"
@@ -40,32 +42,38 @@
 
         <EditText
             android:id="@+id/et_email"
-            android:layout_width="227dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="40dp"
-            android:hint="Email" />
+            android:textColor="@color/colorDarkBlue"
+            android:textColorHint="@color/colorPrimaryDark"
+            android:hint="@string/email" />
 
         <EditText
             android:id="@+id/et_password"
-            android:layout_width="227dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:hint="Password"
+            android:textColor="@color/colorDarkBlue"
+            android:textColorHint="@color/colorPrimaryDark"
+            android:hint="@string/password"
             android:inputType="textPassword" />
 
         <Button
             android:id="@+id/btn_login"
-            android:layout_width="227dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
-            android:text="Login" />
+            android:textColor="@color/colorWhite"
+            android:background="@color/colorBlueGrey"
+            android:text="@string/login" />
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/btn_google"
-            android:layout_width="227dp"
+            android:layout_width="250dp"
             android:layout_marginTop="10dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"/>
@@ -76,28 +84,48 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="5dp"
-            android:text="or"
+            android:text="@string/or"
+            android:textColor="@color/colorBlack"
             android:textAlignment="center"
             android:textSize="15sp" />
 
         <Button
             android:id="@+id/btn_register"
-            android:layout_width="227dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_gravity="center_horizontal"
-            android:text="Register" />
-
+            android:textColor="@color/colorWhite"
+            android:background="@color/colorBlueGrey"
+            android:text="@string/register" />
 
         <TextView
             android:id="@+id/tv_forgot"
-            android:layout_width="227dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dp"
-            android:text="Forgot your password?"
+            android:text="@string/forgot_pass"
             android:textAlignment="textEnd"
+            android:textColor="@color/colorDarkBlue"
             android:textSize="15sp" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn_skip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:background="@android:color/transparent"
+                android:padding="8dp"
+                android:text="@string/skip_login"
+                android:textAlignment="center"
+                android:textColor="@color/colorDarkBlue" />
+        </RelativeLayout>
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
