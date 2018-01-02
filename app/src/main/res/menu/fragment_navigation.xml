@@ -3,12 +3,12 @@
     <item
         android:id="@+id/recentlist"
         android:icon="@drawable/recentimg"
-        android:title="Recent" />
+        android:title="@string/recent" />
 
     <item
         android:id="@+id/myadverts"
         android:icon="@drawable/mylist"
-        android:title="My Adverts" />
+        android:title="@string/my_adverts" />
 
 
 

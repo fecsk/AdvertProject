@@ -6,7 +6,7 @@
         android:id="@+id/Searchbutton"
         android:icon="@drawable/ic_menu_search"
         android:orderInCategory="102"
-        android:title="Search"
+        android:title="@string/search"
         app:actionViewClass="android.widget.SearchView"
         app:showAsAction="always">
 
@@ -15,7 +15,7 @@
         android:id="@+id/Addbutton"
         android:icon="@drawable/ic_add_black_24dp"
         android:orderInCategory="103"
-        android:title="Add"
+        android:title="@string/add"
         app:showAsAction="always">
 
     </item>
@@ -29,7 +29,7 @@
     </item>
 
     <item android:id="@+id/viewProfileButton"
-        android:title="View Profile"
+        android:title="@string/view_profile"
 
         android:orderInCategory="300"
         app:showAsAction="ifRoom">
@@ -37,7 +37,7 @@
     </item>
 
     <item android:id="@+id/editProfileButton"
-        android:title="Edit Profile"
+        android:title="@string/edit_profile"
 
         android:orderInCategory="300"
         app:showAsAction="ifRoom">
