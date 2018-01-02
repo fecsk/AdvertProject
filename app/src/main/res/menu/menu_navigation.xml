@@ -20,13 +20,6 @@
 
     </item>
 
-    <item android:id="@+id/Loginbutton"
-        android:title="Login/Logout"
-
-        android:orderInCategory="300"
-        app:showAsAction="ifRoom">
-
-    </item>
 
     <item android:id="@+id/viewProfileButton"
         android:title="@string/view_profile"
@@ -44,6 +37,12 @@
 
     </item>
 
+    <item android:id="@+id/Loginbutton"
+        android:title="Login/Logout"
 
+        android:orderInCategory="300"
+        app:showAsAction="ifRoom">
+
+    </item>
 
 </menu>

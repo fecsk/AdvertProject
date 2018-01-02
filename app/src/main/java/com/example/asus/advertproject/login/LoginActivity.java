@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.asus.advertproject.R;
 import com.example.asus.advertproject.main.MainActivity;
+import com.example.asus.advertproject.model.User;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -31,8 +32,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -133,9 +137,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
-                            // updateUI(user);
-                            Toast.makeText(LoginActivity.this, "Login success",
-                                    Toast.LENGTH_SHORT).show();
+
                             logIn(mAuth.getCurrentUser());
                         }
                         else {
@@ -160,10 +162,29 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void logIn(FirebaseUser user) {
-        if (!user.isAnonymous()) {
-            Toast.makeText(getApplicationContext(), "Welcome back " + user.getDisplayName(), Toast.LENGTH_SHORT)
-                    .show();
-        } else {
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference.child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        User user = dataSnapshot.getValue(User.class);
+
+                        if (user != null) {
+                            Toast.makeText(getApplicationContext(), "Welcome, " + user.getFirstName() + "!", Toast.LENGTH_SHORT)
+                                    .show();
+                        }
+                        else Log.d(TAG, "Error Null user!!!!");
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Toast.makeText(getApplicationContext(), "Database query unsuccessful", Toast.LENGTH_SHORT)
+                                .show();
+
+                    }
+                });
+        if (user.isAnonymous()) {
             Toast.makeText(getApplicationContext(), "Welcome anonymous user", Toast.LENGTH_SHORT)
                     .show();
         }
