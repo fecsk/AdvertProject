@@ -129,11 +129,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                         FirebaseDatabase database = FirebaseDatabase.getInstance();
                                         DatabaseReference myRef = database.getReference("users");
 
-                                        //Query query = myRef.orderByKey();
-                                        //Log.d(TAG, "query: "+query.limitToLast(1).toString());
                                         Log.d(TAG, "phone: " + user.getPhoneNumber());
 
-                                        //myRef.child("userID").setValue(user.getU_id());
                                         myRef.child(user.getU_id()).child("firstName").setValue(user.getFirstName());
                                         myRef.child(user.getU_id()).child("lastName").setValue(user.getLastName());
                                         myRef.child(user.getU_id()).child("phoneNumber").setValue(user.getPhoneNumber());

@@ -40,7 +40,7 @@
             android:screenOrientation="portrait" />
         <activity android:name=".login.ForgotPasswordActivity" />
         <activity android:name=".profile.ViewProfileActivity" />
-        <activity android:name=".advertfeed.MapActivity"></activity>
+        <activity android:name=".advertfeed.MapActivity" />
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -49,6 +49,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
+        <activity android:name=".profile.EditProfileActivity"></activity>
     </application>
 
 </manifest>

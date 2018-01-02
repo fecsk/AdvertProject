@@ -21,6 +21,7 @@ import com.example.asus.advertproject.R;
 import com.example.asus.advertproject.advertfeed.*;
 import com.example.asus.advertproject.login.LoginActivity;
 import com.example.asus.advertproject.model.Advert;
+import com.example.asus.advertproject.profile.EditProfileActivity;
 import com.example.asus.advertproject.profile.ViewProfileActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -158,9 +159,16 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         if (id == R.id.editProfileButton) {
-            Intent i=new Intent(MainActivity.this,ViewProfileActivity.class);
-            startActivity(i);
-            return true;
+            if(user != null) {
+                Intent i = new Intent(MainActivity.this, EditProfileActivity.class);
+                startActivity(i);
+                return true;
+            }
+            else{
+                Toast.makeText(MainActivity.this, "Please log in first!",
+                        Toast.LENGTH_SHORT).show();
+                return false;
+            }
         }
 
         return super.onOptionsItemSelected(item);
