@@ -61,17 +61,16 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             }
         });
 
-        // Add a marker in Sydney and move the camera
-        //Todo: current location
-        LatLng marosVasarhely = new LatLng(46.55, 24.5667);
-        mMap.addMarker(new MarkerOptions().position(marosVasarhely).title("Marker in Marosvasarhely"));
+
+        LatLng marosVasarhely = new LatLng(46.55, 24.56);
+        //mMap.addMarker(new MarkerOptions().position(marosVasarhely).title("Marker in Marosvasarhely"));
 
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             Permissions.permissionRequest(this, Permissions.permissions, Permissions.PERMISSION_KEY);
         }
         mMap.setMyLocationEnabled(true);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marosVasarhely,12));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marosVasarhely,13));
         mMap.setMaxZoomPreference(14.0f);
     }
 

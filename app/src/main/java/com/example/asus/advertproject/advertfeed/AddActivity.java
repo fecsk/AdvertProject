@@ -202,12 +202,22 @@ public class AddActivity extends AppCompatActivity {
                         adapter.add(im);
                     adapter.notifyDataSetChanged();
                 }
+                break;
 
             case MAPS_COORDINATE_ADD:
                 if(resultCode != 0) {
                     mlatitude = data.getDoubleExtra("latitude", 0);
                     mlongitude = data.getDoubleExtra("longitude", 0);
+                    if(mlatitude == 0 && mlongitude == 0){
+                        Toast.makeText(getApplicationContext(), "Please try again", Toast.LENGTH_SHORT)
+                                .show();
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(), "Coordinates set", Toast.LENGTH_SHORT)
+                                .show();
+                    }
                 }
+                break;
             default:
                 break;
         }
