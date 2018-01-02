@@ -72,49 +72,64 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                 final String firstName = firstNameEditText.getText().toString();
                 final String lastName = lastNameEditText.getText().toString();
                 final String phoneNumber = phoneNumberEditText.getText().toString();
+                if(verifyEmptyAll(firstNameEditText, lastNameEditText, phoneNumberEditText)) {
 
-                databaseReference = FirebaseDatabase.getInstance().getReference();
-                databaseReference.child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                        .addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
+                    databaseReference = FirebaseDatabase.getInstance().getReference();
+                    databaseReference.child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                            .addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
 
-                                User user = dataSnapshot.getValue(User.class);
-                                if (user != null) {
-                                    FirebaseDatabase database = FirebaseDatabase.getInstance();
-                                    DatabaseReference myRef = database.getReference("users");
+                                    User user = dataSnapshot.getValue(User.class);
+                                    if (user != null) {
+                                        FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                        DatabaseReference myRef = database.getReference("users");
 
-                                    FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
-                                    FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
-                                    userID = mFirebaseUser.getUid();
+                                        FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
+                                        FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
+                                        userID = mFirebaseUser.getUid();
 
-                                    if (!TextUtils.isEmpty(firstName)) {
-                                        myRef.child(userID).child("firstName").setValue(firstName);
-                                    }
-                                    if (!TextUtils.isEmpty(lastName)) {
-                                        myRef.child(userID).child("lastName").setValue(lastName);
-                                    }
-                                    if (!TextUtils.isEmpty(phoneNumber)) {
-                                        myRef.child(userID).child("phoneNumber").setValue(phoneNumber);
-                                    }
-                                    Toast.makeText(getApplicationContext(), "Your changes have been saved", Toast.LENGTH_SHORT)
-                                            .show();
-                                    finish();
+                                        if (!TextUtils.isEmpty(firstName)) {
+                                            myRef.child(userID).child("firstName").setValue(firstName);
+                                        }
+                                        if (!TextUtils.isEmpty(lastName)) {
+                                            myRef.child(userID).child("lastName").setValue(lastName);
+                                        }
+                                        if (!TextUtils.isEmpty(phoneNumber)) {
+                                            myRef.child(userID).child("phoneNumber").setValue(phoneNumber);
+                                        }
+                                        Toast.makeText(getApplicationContext(), "Your changes have been saved", Toast.LENGTH_SHORT)
+                                                .show();
+                                        finish();
+                                    } else Log.d(TAG, "Error Null user!!!!");
                                 }
-                                else Log.d(TAG, "Error Null user!!!!");
-                            }
 
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-                                Toast.makeText(getApplicationContext(), "Database query unsuccessful", Toast.LENGTH_SHORT)
-                                        .show();
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+                                    Toast.makeText(getApplicationContext(), "Database query unsuccessful", Toast.LENGTH_SHORT)
+                                            .show();
 
-                            }
-                        });
-                break;
+                                }
+                            });
+                    break;
+                }
+                else break;
 
             default:
                 break;
         }
+    }
+
+    public boolean verifyEmptyAll(EditText firstNameEditText, EditText lastNameEditText, EditText phoneNumberEditText){
+        String firstName = firstNameEditText.getText().toString();
+        String lastName = lastNameEditText.getText().toString();
+        String phoneNumber = phoneNumberEditText.getText().toString();
+        if(TextUtils.isEmpty(firstName) && TextUtils.isEmpty(lastName) && TextUtils.isEmpty(phoneNumber)){
+            firstNameEditText.setError("All fields are empty!");
+            lastNameEditText.setError("All fields are empty!");
+            phoneNumberEditText.setError("All fields are empty!");
+            return false;
+        }
+        else return true;
     }
 }
