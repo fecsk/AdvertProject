@@ -74,6 +74,8 @@ public class AdvertFeedFragment extends Fragment implements AdvertClickListener{
         recyclerView = view.findViewById(R.id.recycler_view);
         mAdapter = new RecyclerViewAdapter(advertList, getContext(), this);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+        mLayoutManager.setReverseLayout(true);
+        mLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
