@@ -19,6 +19,8 @@ public class User {
         this.phoneNumber = builder.phoneNumber;
     }
 
+    public User(){}
+
     public static class Builder{
         String Uid;
         String firstName;
