@@ -96,7 +96,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
             android:textColor="@color/colorWhite"
-            android:background="@color/colorBlueGrey"
+            android:background="@color/colorJade"
             android:text="@string/register" />
 
 
