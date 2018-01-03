@@ -87,7 +87,7 @@ public class MyAdvertFeedFragment extends Fragment implements AdvertClickListene
 
     private void loadData() {
 
-        mDatabase.child("adverts").orderByChild("creatorid").equalTo(user.getUid())
+        mDatabase.child("users").child(user.getUid()).child("myposts").orderByChild("hidden").equalTo("no")
 
                 .addValueEventListener(new ValueEventListener() {
                     @Override

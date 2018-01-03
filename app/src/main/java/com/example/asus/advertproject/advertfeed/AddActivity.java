@@ -24,13 +24,17 @@ import android.widget.Toast;
 
 import com.example.asus.advertproject.R;
 import com.example.asus.advertproject.model.Advert;
+import com.example.asus.advertproject.model.User;
 import com.example.asus.advertproject.permissions.Permissions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -59,7 +63,8 @@ public class AddActivity extends AppCompatActivity {
     private ArrayList<String> urls;
     private Double mlatitude, mlongitude;
     private int counter=0;
-    String userID = "000";
+    String userID ;
+    User mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,8 +97,14 @@ public class AddActivity extends AppCompatActivity {
         publishButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                upload();
-                //finish();
+                if(check()) {
+                    upload();
+
+                }
+                else
+                {
+                    toastMessage("missing input");
+                }
             }
         });
         addPhotoButton.setOnClickListener(new View.OnClickListener() {
@@ -126,6 +137,7 @@ public class AddActivity extends AppCompatActivity {
 
         if (user != null) {
             userID = user.getUid();
+            initUser();
         }
         mProgressDialog.setMessage("Uploading Image...");
         mProgressDialog.show();
@@ -159,16 +171,20 @@ public class AddActivity extends AppCompatActivity {
                     counter++;
                     if(counter==imguris.size()) {
                         toastMessage("Upload Success");
-                        if(urls.size()>0) {
-
-                            Advert uj = new Advert(titleEt.getText().toString(), descriptionEt.getText().toString(), userID, Long.toString(System.currentTimeMillis()),
-                                    mlatitude, mlongitude, urls.get(0), "gs://advertproject-10f39.appspot.com/profilepics/harambe.jpg", urls,"no");
+                        if(urls.size()>0 && mUser!=null) {
                             String key = mDatabase.child("adverts").push().getKey();
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                            Advert uj = new Advert(key,titleEt.getText().toString(), descriptionEt.getText().toString(), userID, Long.toString(System.currentTimeMillis()),
+                                    mlatitude, mlongitude, urls.get(0), mUser.getPhotoURL(), urls,"no");
+
+
                             mDatabase.child("adverts").child(key).setValue(uj);
+                            mDatabase.child("users").child(user.getUid()).child("myposts").child(key).setValue(uj);
                             finish();
                         }
                         else {
-                            toastMessage("baj vban");
+                            toastMessage("Wrong input");
                         }
                         mProgressDialog.dismiss();
 
@@ -270,6 +286,43 @@ public class AddActivity extends AppCompatActivity {
         }else{
             Log.d(TAG, "checkBTPermissions: No need to check permissions. SDK version < LOLLIPOP.");
         }
+    }
+
+    private void initUser()
+    {
+        mDatabase.child("users").child(userID)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        User usr= dataSnapshot.getValue(User.class);
+
+                        if (usr != null) {
+                            mUser=usr;
+
+
+                        }
+                        else Log.d(TAG, "Error Null user!!!!");
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Toast.makeText(getApplicationContext(), "Database query unsuccessful", Toast.LENGTH_SHORT)
+                                .show();
+
+                    }
+                });
+    }
+    public boolean check()
+    {
+        if(imguris.size()==0)
+            return false;
+        if(titleEt.getText().length()==0)
+            return false;
+        if(descriptionEt.getText().length()==0)
+            return false;
+
+        return true;
     }
 
 

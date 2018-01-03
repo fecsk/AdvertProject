@@ -13,6 +13,7 @@ import java.util.List;
  */
 
 public class Advert implements Parcelable {
+    public String advertID;
     public String title;
     public String description;
     public String creatorid;
@@ -27,7 +28,8 @@ public class Advert implements Parcelable {
     public Advert()
     {};
 
-    public Advert(String title, String description, String creatorid,  String timestamp, double latitude, double longitude, String photoURL, String creator_photo_URL, ArrayList<String> photos,String hidden) {
+    public Advert(String advertID,String title, String description, String creatorid,  String timestamp, double latitude, double longitude, String photoURL, String creator_photo_URL, ArrayList<String> photos,String hidden) {
+        this.advertID=advertID;
         this.title = title;
         this.description = description;
         this.creatorid = creatorid;
@@ -42,6 +44,7 @@ public class Advert implements Parcelable {
 
 
     protected Advert(Parcel in) {
+        this.advertID=in.readString();
         this.title = in.readString();
         this.description = in.readString();
         this.creatorid = in.readString();
@@ -73,6 +76,7 @@ public class Advert implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(advertID);
         parcel.writeString(title );
         parcel.writeString( description);
         parcel.writeString(creatorid );
