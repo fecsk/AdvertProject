@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * Created by Asus on 2017. 12. 30..
  */
-
+//adapter for image chooser List
 public class MyListViewAdapter extends ArrayAdapter<Bitmap> {
     private List<Bitmap> objects;
     private final Context context;

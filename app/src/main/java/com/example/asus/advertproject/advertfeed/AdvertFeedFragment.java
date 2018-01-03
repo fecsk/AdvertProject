@@ -26,7 +26,7 @@ import java.util.List;
 /**
  * Created by Asus on 2017. 11. 08..
  */
-
+//this fragment shows all adverts
 public class AdvertFeedFragment extends Fragment implements AdvertClickListener{
 
     private NavigationManager manager;
@@ -83,6 +83,7 @@ public class AdvertFeedFragment extends Fragment implements AdvertClickListener{
     }
 
     private void loadData() {
+        //download data from firebase
 
         mDatabase.child("adverts").orderByChild("hidden").equalTo("no")
 

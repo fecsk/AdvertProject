@@ -44,6 +44,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+// activity for add new advert
 public class AddActivity extends AppCompatActivity {
     private static final String TAG = "AddActivity";
     ImageView imageView;
@@ -78,6 +79,7 @@ public class AddActivity extends AppCompatActivity {
         imguris=new ArrayList<>();
         imageList=new ArrayList<>();
         urls=new ArrayList<>();
+        //permisssion check
         checkFilePermissions();
           adapter= new MyListViewAdapter(this, imageList);
         lvImages.setAdapter(adapter);
@@ -97,6 +99,7 @@ public class AddActivity extends AppCompatActivity {
         publishButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //checking fields before upload
                 if(check()) {
                     upload();
 
@@ -113,11 +116,11 @@ public class AddActivity extends AppCompatActivity {
                 openGallery();
             }
         });
+        //location picker
         locationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(AddActivity.this, MapActivity.class);
-                //Log.d(TAG, "clickeddddddddddd");
                 startActivityForResult(i, MAPS_COORDINATE_ADD);
             }
         });
@@ -141,6 +144,7 @@ public class AddActivity extends AppCompatActivity {
         }
         mProgressDialog.setMessage("Uploading Image...");
         mProgressDialog.show();
+        //compressing and uploading images
         for (int i = 0; i < imguris.size(); i++) {
 
             String name = Long.toString(System.currentTimeMillis());

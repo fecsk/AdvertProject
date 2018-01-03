@@ -23,7 +23,7 @@ import java.util.List;
  * Created by Asus on 2017. 11. 04..
  */
 
-
+//adapter for RecyclerView
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
 
 

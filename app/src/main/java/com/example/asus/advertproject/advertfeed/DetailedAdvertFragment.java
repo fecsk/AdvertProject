@@ -56,8 +56,8 @@ public class DetailedAdvertFragment  extends Fragment{
 
          advert = (Advert) getArguments().get("advert");
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        Button deleteBtn=view.findViewById(R.id.deleteBtn);
-        deleteBtn.setVisibility(View.GONE);
+        Button deleteBtn=view.findViewById(R.id.deleteBtn);//if I uploaded the advertisment I can delete this
+        deleteBtn.setVisibility(View.GONE);// delete button is invisible for unauthorized users
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String usr="a";
         if(user!=null)

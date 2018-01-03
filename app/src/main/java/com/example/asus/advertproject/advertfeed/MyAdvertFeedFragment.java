@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * Created by Asus on 2018. 01. 03..
  */
-
+//this fragment shows the users adverts
 public class MyAdvertFeedFragment extends Fragment implements AdvertClickListener{
 
     private NavigationManager manager;

@@ -18,7 +18,7 @@ import com.firebase.ui.storage.images.FirebaseImageLoader;
 /**
  * Created by Asus on 2017. 12. 23..
  */
-
+// adapter for ViewPager
 public class ViewPagerAdapter extends PagerAdapter {
     Fragment activity;
     String[] images;
