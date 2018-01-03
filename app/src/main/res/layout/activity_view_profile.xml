@@ -14,12 +14,15 @@
         android:textColor="@color/colorDarkBlue"
         android:layout_centerHorizontal="true"
         android:textSize="35sp"/>
+
     <ImageView
+        android:id="@+id/profileIV"
         android:layout_width="wrap_content"
         android:layout_height="156dp"
         android:layout_marginLeft="3dp"
         android:layout_marginRight="3dp"
         android:layout_marginTop="60dp"
+        android:layout_centerHorizontal="true"
         android:src="@drawable/advertapplogo" />
     <TextView
         android:layout_width="wrap_content"

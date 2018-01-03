@@ -3,9 +3,11 @@ package com.example.asus.advertproject.profile;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.asus.advertproject.R;
 import com.example.asus.advertproject.model.User;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,6 +26,7 @@ public class ViewProfileActivity extends AppCompatActivity {
             phoneNumberTextView;
     private DatabaseReference databaseReference;
     private String userEmail;
+    private ImageView profileImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,7 @@ public class ViewProfileActivity extends AppCompatActivity {
         lastNameTextView = findViewById(R.id.text_view_last_name);
         emailAddressTextView = findViewById(R.id.text_view_email);
         phoneNumberTextView = findViewById(R.id.text_view_phone_number);
+        profileImageView=findViewById(R.id.profileIV);
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
         databaseReference.child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -53,6 +57,9 @@ public class ViewProfileActivity extends AppCompatActivity {
 
                             emailAddressTextView.setText(userEmail);
                             phoneNumberTextView.setText(user.getPhoneNumber());
+                            Glide.with(getApplicationContext())
+                                    .load(user.getPhotoURL())
+                                    .into(profileImageView);
                         }
                         else Log.d(TAG, "Error Null user!!!!");
                     }

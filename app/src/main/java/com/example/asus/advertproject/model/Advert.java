@@ -22,11 +22,12 @@ public class Advert implements Parcelable {
     public ArrayList<String> photos;
     public double latitude;
     public double longitude;
+    public int  hidden; // 0=false, 1=true
 
     public Advert()
     {};
 
-    public Advert(String title, String description, String creatorid,  String timestamp, double latitude, double longitude, String photoURL, String creator_photo_URL, ArrayList<String> photos) {
+    public Advert(String title, String description, String creatorid,  String timestamp, double latitude, double longitude, String photoURL, String creator_photo_URL, ArrayList<String> photos,int hidden) {
         this.title = title;
         this.description = description;
         this.creatorid = creatorid;
@@ -36,6 +37,7 @@ public class Advert implements Parcelable {
         this.photoURL = photoURL;
         this.creator_photo_URL=creator_photo_URL;
         this.photos=photos;
+        this.hidden=hidden;
         }
 
 
@@ -49,6 +51,7 @@ public class Advert implements Parcelable {
         this.photoURL =in.readString();
         this.creator_photo_URL=in.readString();
         this.photos = (ArrayList<String>) in.readSerializable();
+        this.hidden=in.readInt();
     }
 
     public static final Creator<Advert> CREATOR = new Creator<Advert>() {
@@ -79,6 +82,7 @@ public class Advert implements Parcelable {
         parcel.writeString(photoURL);
         parcel.writeString(creator_photo_URL);
         parcel.writeSerializable(photos);
+        parcel.writeInt(hidden);
     }
 
     public String getTitle() {

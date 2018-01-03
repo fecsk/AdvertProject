@@ -10,6 +10,7 @@ public class User {
     private String lastName;
     private String email;
     private String phoneNumber;
+    private String photoURL;
 
     public User (Builder builder){
         this.firstName = builder.firstName;
@@ -57,6 +58,14 @@ public class User {
     }
 
     public String getU_id() { return u_id; }
+
+    public String getPhotoURL() {
+        return photoURL;
+    }
+
+    public void setPhotoURL(String photoURL) {
+        this.photoURL = photoURL;
+    }
 
     public String getFirstName() {
         return firstName;

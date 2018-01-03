@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -64,6 +65,10 @@ public class AddActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            getWindow().setStatusBarColor(getResources().getColor(R.color.colorAction));
+        }
         final ListView lvImages = (ListView) findViewById(R.id.listView);
         imguris=new ArrayList<>();
         imageList=new ArrayList<>();
@@ -157,7 +162,7 @@ public class AddActivity extends AppCompatActivity {
                         if(urls.size()>0) {
 
                             Advert uj = new Advert(titleEt.getText().toString(), descriptionEt.getText().toString(), userID, Long.toString(System.currentTimeMillis()),
-                                    mlatitude, mlongitude, urls.get(0), "gs://advertproject-10f39.appspot.com/profilepics/harambe.jpg", urls);
+                                    mlatitude, mlongitude, urls.get(0), "gs://advertproject-10f39.appspot.com/profilepics/harambe.jpg", urls,0);
                             String key = mDatabase.child("adverts").push().getKey();
                             mDatabase.child("adverts").child(key).setValue(uj);
                             finish();

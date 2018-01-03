@@ -77,8 +77,18 @@ public class MainActivity extends AppCompatActivity {
                         manager.switchToMainFragment(new AdvertFeedFragment());
                         return true;
                     case R.id.myadverts:
-                        manager.switchToMainFragment(new AdvertFeedFragment());
-                        return true;
+                        if(user != null) {
+                            manager.switchToMainFragment(new AdvertFeedFragment());
+                            return true;
+
+                        }
+                        else{
+                            Toast.makeText(MainActivity.this, "Please log in first!",
+                                    Toast.LENGTH_SHORT).show();
+                            return false;
+                        }
+
+
 
                 }
                 return false;
@@ -114,9 +124,19 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
 
         if (id == R.id.Addbutton) {
-            Intent i=new Intent(MainActivity.this,AddActivity.class);
-            startActivity(i);
-            return true;
+
+
+            if(user != null) {
+                Intent i=new Intent(MainActivity.this,AddActivity.class);
+                startActivity(i);
+                return true;
+
+            }
+            else{
+                Toast.makeText(MainActivity.this, "Please log in first!",
+                        Toast.LENGTH_SHORT).show();
+                return false;
+            }
         }
         if (id == R.id.Loginbutton) {
             if(user == null) {
