@@ -162,7 +162,7 @@ public class AddActivity extends AppCompatActivity {
                         if(urls.size()>0) {
 
                             Advert uj = new Advert(titleEt.getText().toString(), descriptionEt.getText().toString(), userID, Long.toString(System.currentTimeMillis()),
-                                    mlatitude, mlongitude, urls.get(0), "gs://advertproject-10f39.appspot.com/profilepics/harambe.jpg", urls,0);
+                                    mlatitude, mlongitude, urls.get(0), "gs://advertproject-10f39.appspot.com/profilepics/harambe.jpg", urls,"no");
                             String key = mDatabase.child("adverts").push().getKey();
                             mDatabase.child("adverts").child(key).setValue(uj);
                             finish();

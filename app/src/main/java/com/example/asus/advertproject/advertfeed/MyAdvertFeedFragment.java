@@ -1,6 +1,5 @@
 package com.example.asus.advertproject.advertfeed;
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -14,6 +13,8 @@ import android.view.ViewGroup;
 import com.example.asus.advertproject.R;
 import com.example.asus.advertproject.main.NavigationManager;
 import com.example.asus.advertproject.model.Advert;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,10 +25,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Asus on 2017. 11. 08..
+ * Created by Asus on 2018. 01. 03..
  */
 
-public class AdvertFeedFragment extends Fragment implements AdvertClickListener{
+public class MyAdvertFeedFragment extends Fragment implements AdvertClickListener{
 
     private NavigationManager manager;
     private View view;
@@ -35,13 +36,14 @@ public class AdvertFeedFragment extends Fragment implements AdvertClickListener{
     private DatabaseReference mDatabase;
     private RecyclerViewAdapter mAdapter;
     private RecyclerView recyclerView;
+    private FirebaseUser user;
 
 
 
 
 
 
-    public AdvertFeedFragment() {
+    public MyAdvertFeedFragment() {
         // Required empty public constructor
     }
     @Override
@@ -66,8 +68,9 @@ public class AdvertFeedFragment extends Fragment implements AdvertClickListener{
     }
 
     private void initViews() {
+         user= FirebaseAuth.getInstance().getCurrentUser();
 
-        getActivity().setTitle("Advert Feed");
+        getActivity().setTitle("My Adverts");
         advertList = new ArrayList<>();
         manager = new NavigationManager(getFragmentManager());
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -84,7 +87,7 @@ public class AdvertFeedFragment extends Fragment implements AdvertClickListener{
 
     private void loadData() {
 
-        mDatabase.child("adverts").orderByChild("hidden").equalTo("no")
+        mDatabase.child("adverts").orderByChild("creatorid").equalTo(user.getUid())
 
                 .addValueEventListener(new ValueEventListener() {
                     @Override

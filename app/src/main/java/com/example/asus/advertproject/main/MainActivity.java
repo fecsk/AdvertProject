@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.myadverts:
                         if(user != null) {
-                            manager.switchToMainFragment(new AdvertFeedFragment());
+                            manager.switchToMainFragment(new MyAdvertFeedFragment());
                             return true;
 
                         }
