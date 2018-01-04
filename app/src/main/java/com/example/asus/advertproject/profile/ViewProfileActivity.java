@@ -28,6 +28,12 @@ public class ViewProfileActivity extends AppCompatActivity {
     private String userEmail;
     private ImageView profileImageView;
 
+    /**
+     * Loads saved data from the Firebase if the user is signed in, and displays it immediately.
+     * Cannot display phone number is user signed in with a Google account.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

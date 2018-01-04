@@ -17,6 +17,15 @@ public class Permissions {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
+
+    /**
+     * Requests user permission to all specified data.
+     * In this case location and media.
+     *
+     * @param context
+     * @param permissions array of permissions required
+     * @param PERMISSION_KEY
+     */
     public static void permissionRequest(Context context, String permissions[], int PERMISSION_KEY) {
         ActivityCompat.requestPermissions((Activity) context, permissions, PERMISSION_KEY);
     }

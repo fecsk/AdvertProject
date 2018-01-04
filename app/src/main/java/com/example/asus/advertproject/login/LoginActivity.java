@@ -100,10 +100,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-
         switch (v.getId()) {
-
             case R.id.btn_login:
+                /**
+                 * Checks is the validateForm function returns true after the Login button has been pressed
+                 */
                 if(validateForm()){
                     signIn(mEmailField.getText().toString(),mPasswordField.getText().toString());
                 }
@@ -133,9 +134,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    /**
+     * This method gets called when the Login button is pressed and after it passes the validateForm method.
+     *
+     * @param email a string input by user specifying email address
+     * @param password a string input by user specifying password
+     */
     private void signIn(final String email, final String password) {
         Log.d(TAG, "signIn: " + email);
-
         // [START sign_in_with_email]
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -168,6 +174,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // [END sign_in_with_email]
     }
 
+    /**
+     * The user has been successfully logged in via email and password or google sign in.
+     * The method displays a greeting toast including the user's first name, then calls the Main Activity.
+     *
+     * @param user the registered Firebase user
+     */
     private void logIn(FirebaseUser user) {
         databaseReference = FirebaseDatabase.getInstance().getReference();
         databaseReference.child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -219,6 +231,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    /**
+     * Then signs in with the recieved Google account.
+     *
+     * @param acct the Google account the user selected
+     */
     private void signInWithGoogle(final GoogleSignInAccount acct) {
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
@@ -237,6 +254,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 });
     }
 
+    /**
+     * Adds user's details to Firebase (first name, last name and email)
+     * The user ID is always the same, so no duplicates are created.
+     *
+     * @param user the current user of the app
+     * @param acct the Google account the user selected
+     */
     private void addUserToDatabase(FirebaseUser user, GoogleSignInAccount acct) {
         DatabaseReference usersDatabaseReference = databaseReference.child("users").child(user.getUid());
         usersDatabaseReference.child("firstName").setValue(acct.getGivenName());
@@ -244,22 +268,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         usersDatabaseReference.child("email").setValue(acct.getEmail());
     }
 
-//    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
-//        try {
-//            Log.d(TAG, "GoogleHandle: " + "googleReturned3");
-//            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-//            FirebaseUser user = mAuth.getCurrentUser();
-//            // Signed in successfully, show authenticated UI.
-//            //updateUI(account);
-//
-//        } catch (ApiException e) {
-//            // The ApiException status code indicates the detailed failure reason.
-//            // Please refer to the GoogleSignInStatusCodes class reference for more information.
-//            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
-//            //updateUI(null);
-//        }
-//    }
-
+    /**
+     * This function checks if the Login form is valid or not
+     *
+     * @return whether the fields have been completed
+     */
     private boolean validateForm() {
         boolean valid = true;
 

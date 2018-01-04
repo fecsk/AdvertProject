@@ -28,6 +28,12 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     private DatabaseReference databaseReference;
     private String userID;
 
+
+    /**
+     * Displays user data if user is logged in, except email, which cannot be changed.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +71,14 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                 });
     }
 
+    /**
+     * Verifies that at least one field is not empty
+     * Checks if logged in user has data in the database
+     * Overwrites the specified field one by one, and at least one.
+     * Displays Toast message on success or failure.
+     *
+     * @param v
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -120,6 +134,15 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+    /**
+     * This method checks if at least one field is not empty.
+     * If all fields are empty, returns false, and user gets an error set on the fields.
+     *
+     * @param firstNameEditText field in which user can input String
+     * @param lastNameEditText field in which user can input String
+     * @param phoneNumberEditText field in which user can input String
+     * @return true or false depending if the requirements are met or not
+     */
     public boolean verifyEmptyAll(EditText firstNameEditText, EditText lastNameEditText, EditText phoneNumberEditText){
         String firstName = firstNameEditText.getText().toString();
         String lastName = lastNameEditText.getText().toString();

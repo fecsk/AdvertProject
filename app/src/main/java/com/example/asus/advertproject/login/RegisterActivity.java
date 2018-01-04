@@ -85,6 +85,19 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    /**
+     * This method registers the user if all fields are completed, and adds the data to Firebase.
+     * It catches the Firebase errors that can occur, like malformed email or weak password.
+     * If it passes, the details are stored under the unique User ID (first name, last name, phone number).
+     * After a Toast message, it returns to the Login Activity.
+     *
+     * @param firstName a string input by the user
+     * @param lastName a string input by the user
+     * @param email a string input by the user, has to be unique
+     * @param phoneNumber a string input by the user
+     * @param password a string input by the user
+     * @param confirmPassword a string input by the user, has to match the first password
+     */
     private void register(final String firstName, final String lastName, final String email, final String phoneNumber, final String password, final String confirmPassword)
     {
         if(validateForm()) {
@@ -153,6 +166,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    /**
+     * This method verifies is the user filled form can be accepted or not.
+     * The user can only register if this method returns true.
+     *
+     * @return true or false depending is all the fields are completed and the passwords match
+     */
     private boolean validateForm() {
         boolean valid = true;
 

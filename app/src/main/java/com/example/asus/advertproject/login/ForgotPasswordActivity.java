@@ -39,6 +39,14 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
         mAuth = FirebaseAuth.getInstance();
     }
 
+    /**
+     * Verifies if the email field is empty or not. Can only proceed is completed.
+     * Uses the default Firebase option to reset the password.
+     * The user gets the default template email.
+     * Displays success or failure message.
+     *
+     * @param v only one button possible
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
