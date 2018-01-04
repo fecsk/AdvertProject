@@ -44,7 +44,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-// activity for add new advert
+/** activity for add new advert */
 public class AddActivity extends AppCompatActivity {
     private static final String TAG = "AddActivity";
     ImageView imageView;
@@ -273,12 +273,14 @@ public class AddActivity extends AppCompatActivity {
     private void toastMessage(String message){
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
     }
+    /** compress images */
     public Uri getImageUri(Context inContext, Bitmap inImage) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
         String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
         return Uri.parse(path);
     }
+    /**permisssion check*/
     private void checkFilePermissions() {
         if(Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP){
             if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -292,6 +294,7 @@ public class AddActivity extends AppCompatActivity {
         }
     }
 
+    /** download user */
     private void initUser()
     {
         mDatabase.child("users").child(userID)
@@ -317,6 +320,7 @@ public class AddActivity extends AppCompatActivity {
                     }
                 });
     }
+    /** input check */
     public boolean check()
     {
         if(imguris.size()==0)

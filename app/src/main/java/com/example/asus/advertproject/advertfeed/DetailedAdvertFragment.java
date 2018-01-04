@@ -26,7 +26,7 @@ import com.google.firebase.storage.StorageReference;
 /**
  * Created by Asus on 2017. 11. 08..
  */
-
+/** fragment for detailed advert */
 public class DetailedAdvertFragment  extends Fragment{
     private View view;
     private ViewPager viewPager;

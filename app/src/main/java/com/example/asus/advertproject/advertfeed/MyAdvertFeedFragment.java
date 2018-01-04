@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * Created by Asus on 2018. 01. 03..
  */
-//this fragment shows the users adverts
+/** this fragment shows the my adverts */
 public class MyAdvertFeedFragment extends Fragment implements AdvertClickListener{
 
     private NavigationManager manager;
@@ -67,6 +67,7 @@ public class MyAdvertFeedFragment extends Fragment implements AdvertClickListene
         return view;
     }
 
+    /** initialize views */
     private void initViews() {
          user= FirebaseAuth.getInstance().getCurrentUser();
 
@@ -85,6 +86,7 @@ public class MyAdvertFeedFragment extends Fragment implements AdvertClickListene
 
     }
 
+    /** download data from firebase */
     private void loadData() {
 
         mDatabase.child("users").child(user.getUid()).child("myposts").orderByChild("hidden").equalTo("no")
@@ -115,6 +117,7 @@ public class MyAdvertFeedFragment extends Fragment implements AdvertClickListene
 
 
 
+    /** click handler for adverts */
     @Override
     public void onItemClick(Advert advert) {
         DetailedAdvertFragment advertDetailFragment = new DetailedAdvertFragment();
