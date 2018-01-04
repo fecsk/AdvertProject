@@ -23,6 +23,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
     private GoogleMap mMap;
     private double latitude, longitude;
+    private String latid="0.0",longit="0.0";
+    private boolean show;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,18 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        show=true;
+
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                show=false;
+
+            } else {
+                longit= extras.getString("longit");
+                latid= extras.getString("latid");
+            }
+        }
     }
 
 
@@ -62,7 +76,10 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
 
         LatLng marosVasarhely = new LatLng(46.55, 24.56);
-        //mMap.addMarker(new MarkerOptions().position(marosVasarhely).title("Marker in Marosvasarhely"));
+        if(show) {
+            marosVasarhely = new LatLng(Double.parseDouble(latid), Double.parseDouble(longit));
+            mMap.addMarker(new MarkerOptions().position(marosVasarhely).title("Advert location"));
+        }
 
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {

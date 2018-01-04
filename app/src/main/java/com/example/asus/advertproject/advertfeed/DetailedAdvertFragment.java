@@ -1,6 +1,7 @@
 package com.example.asus.advertproject.advertfeed;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -32,6 +33,7 @@ public class DetailedAdvertFragment  extends Fragment{
     private ViewPager viewPager;
     private ViewPagerAdapter viewPagerAdapter;
     private Advert advert;
+    private ImageView uploaderphoto;
     private DatabaseReference mDatabase;
     public DetailedAdvertFragment() {
         // Required empty public constructor
@@ -56,6 +58,17 @@ public class DetailedAdvertFragment  extends Fragment{
 
          advert = (Advert) getArguments().get("advert");
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        uploaderphoto=view.findViewById(R.id.uploaderPhotoIV);
+        Button show=view.findViewById(R.id.showlock);
+        show.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(),MapActivity.class);
+                i.putExtra("latid",Double.toString(advert.latitude));
+                i.putExtra("longit",Double.toString(advert.longitude));
+                startActivity(i);
+            }
+        });
         Button deleteBtn=view.findViewById(R.id.deleteBtn);//if I uploaded the advertisment I can delete this
         deleteBtn.setVisibility(View.GONE);// delete button is invisible for unauthorized users
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -83,7 +96,12 @@ public class DetailedAdvertFragment  extends Fragment{
         TextView descript=(TextView) view.findViewById(R.id.descriptionTV);
         title.setText(advert.getTitle());
         descript.setText(advert.getDescription());
-        StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(advert.getPhotoURL());
+        StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(advert.getCreator_photo_URL());
+
+        Glide.with(getContext())
+                .using(new FirebaseImageLoader())
+                .load(storageReference)
+                .into(uploaderphoto);
 
         viewPager=(ViewPager) view.findViewById(R.id.viewPager);
         String[] photos=advert.photos.toArray(new String[advert.photos.size()]);

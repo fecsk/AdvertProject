@@ -115,7 +115,8 @@ public class AdvertFeedFragment extends Fragment implements AdvertClickListener{
 
 
 
-    /** click handler for adverts */
+    /** click handler for adverts
+     * @param  advert is actual input advertisment*/
     @Override
     public void onItemClick(Advert advert) {
         DetailedAdvertFragment advertDetailFragment = new DetailedAdvertFragment();
